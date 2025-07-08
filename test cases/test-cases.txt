@@ -1,0 +1,381 @@
+Prerequisite: the user is on the http://localhost:3000/ page
+
+Test case 1: Shows icons with names when burger menu is clicked
+GIVEN the user has opened the homepage
+WHEN the user clicks on the burger menu
+THEN the following icons are shown with their names:
+-home
+-events
+-contact
+-login
+Expected: All icons and names are visible
+Actual: As expected
+
+Test case 2: Navigate to events page from home
+GIVEN the user is on the homepage
+WHEN the user clicks the “Events” button
+THEN the user is redirected to the http://localhost:3000/events
+AND the events are shown
+Expected: URL changes to http://localhost:3000/events, list of events is displayed
+Actual: As expected
+
+Test case 3: Open event details page
+GIVEN the user is viewing the homepage
+WHEN the user clicks on some event
+THEN user will be redirected to the event details page
+AND the details page will display:
+- event name
+- event date
+- event location
+- event image
+- back button
+Expected: Event details are displayed
+Actual: as expected
+
+Test case 4: Return to events page from event details
+GIVEN the user is on the event details page
+WHEN the user clicks on “back button”
+THEN the user will be redirected to the http://localhost:3000/events
+AND all events will be displayed
+Expected: Back to events list, events are visible
+Actual: as expected
+
+Test case 5: Navigate to contact page
+GIVEN the user is viewing the homepage
+WHEN the user clicks on the “contact button” from side panel
+THEN the user will be redirected to “http://localhost:3000/contact”
+AND the contact page will display:
+- title: “want to reach out?”
+- name field
+- email field
+- message field
+- blue send button
+Expected: Contact form visible with correct fields
+Actual: as expected
+
+
+Test case 6: Submit contact form with all fields filled
+(Prerequiste: the user is on the http://localhost:3000/contact)
+GIVEN the user has opened the contact page
+AND the user enters name “Amy”
+AND the user enters  email “amy@mail.com”
+And description “text text”
+WHEN the user clicks on “send” button
+THEN the user is redirected to the next page
+AND the message is “Unexpected Application Error!”
+Expected: User is redirected and a message appears “ Actual: User is redirected and a message appears “Unexpected Application Error!”
+
+Test case 7: Submit contact page form with only name filled
+(Prerequiste: the user is on the http://localhost:3000/contact)
+GIVEN the contact form is displayed
+WHEN the user fills name field “Alex”
+AND leaves email field empty
+AND leaves message field empty
+AND clicks send button
+THEN the message below email shows to fill the field
+Expected: Message below email field shown “Please fill out this filed”
+Actual: as expected
+
+Test case 8: Submit contact form with only email field
+(Prerequiste: the user is on the http://localhost:3000/contact)
+GIVEN the contact form is open
+WHEN the user fills email field “test@mail.com”
+AND leaves name field empty
+AND message field empty
+AND clicks send
+THEN the message below email field shows
+Expected: An error message pop out “Please fill out this field” below email field
+Actual: as expected
+
+Test case 9: Submit contact form with only message filled
+(Prerequiste: the user is on the http://localhost:3000/contact)
+GIVEN the contact form is active
+WHEN the user writes “Test message” in the message field
+AND leaves email field empty
+AND name field empty
+AND clicks send
+THEN the message below email field pops out “Please fill out this field”
+Expected: Error message: “Please fill out this field” for missing name and email
+Actual: as expected
+
+Test case 10: Submit contact form with all fields empty
+(Prerequiste: the user is on the http://localhost:3000/contact)
+GIVEN the user is viewing the contact form
+WHEN the user leaves the name field empty
+AND leaves email filed empty
+AND leaves message field empty
+AND the user clicks send
+THEN the message below email field shows up
+Expected: An error message pop out: “Please fill out this field”
+Actual: as expected
+
+Test case 11: Display login form
+GIVEN the user is on http://localhost:3000/
+WHEN the user clicks login
+THEN the login form is shown with:
+- title: “Log in”
+- fields
+ 	1.email
+ 	2.password
+- buttons:
+ 	1. “Go”
+ 	2. “Create user”
+Expected: Login form displays correctly with all buttons
+Actual: as expected
+
+Test case 12: Successful login with valid credentials
+GIVEN the user is on the login form “http://localhost:3000/auth?mode=login”
+WHEN the user enters email “test@mail.com”
+AND the user enters password “pass1234”
+AND user clicks on “Go” button
+THEN the user is redirected to the homepage
+AND login changes to logout
+AND “plus” button is visible
+Expected: Successful login, UI updates -a logout and plus button visible
+Actual: as expected
+
+Test case 13: Create account with valid credentials
+GIVEN the user is on the login form “http://localhost:3000/auth?mode=login”
+WHEN the user enters a new email test123@mail.com
+AND a valid password pass1234
+AND clicks the “Create” button
+THEN new account is created
+AND the user is redirected to the homepage
+AND login button changes to logout
+AND “+” (plus) button becomes visible
+Expected: Account created, the user is redirected, plus button visible, homepage shown
+Actual: as expected
+
+Test case 14: Login with invalid password
+GIVEN the user is on login form “http://localhost:3000/auth?mode=login”
+WHEN user enters a mail test123@mail.com
+AND user enters invalid password “123”
+AND clicks “Go”
+THEN an error message should appear below the password field
+Expected: A message pop out “Invalid email or password entered. Invalid credentials.” Below the password field
+Actual: as expected
+
+Test case 15: Login with empty email field
+GIVEN the user is on login form “http://localhost:3000/auth?mode=login"
+WHEN the user leaves the email field empty
+AND the user enter a password “pass123”
+AND clicks the “Go” button
+THEN an error message should appear below the email field: “password is required”
+Expected: Error message ““Invalid email or password entered. Invalid credentials.” is displayed below the email field
+Actual: As expected
+
+Test case 16: Login with empty email and password
+GIVEN the user is on the login form “http://localhost:3000/auth?mode=login”
+WHEN the user leaves the email filed empty
+AND the user leaves the password field empty
+AND clicks the “Go” button
+THEN an error message should appear below the fields
+Expected: Error message is displayed “Username and password are required”
+Actual: Message “Authentication failed.” Is shown
+
+Test case 17: Register with valid email and empty password
+GIVEN the user is on register form “http://localhost:3000/auth?mode=signup”
+WHEN user enters email test@mail.com
+AND leave a password field empty
+AND clicks “Create”
+THEN and error message pops out below the field
+Expected: An error message should pop out: “Password is required”
+Actual: redirected with message: “Unexpected Application Error!”
+
+Test case 18: Register with empty email and valid password
+GIVEN the user is on register form “http://localhost:3000/auth?mode=signup”
+WHEN the leaves the email field empty
+AND the password is filled “pass1234”
+AND clicks “Create”
+THEN an error message should appear
+Expected Error message “Email is required” is displayed
+Actual: User is redirected with message “Unexpected Application Error!”
+
+Test case 19: Register with both email and password fields empty
+GIVEN the user is on register form “http://localhost:3000/auth?mode=signup”
+WHEN the user leave the email field empty
+AND the user leaves the password field empty
+AND clicks “Create”
+THEN an error should be displayed saying that fields are required
+Expected: Error message “Email and password are required”
+Actual: User is redirected with message “Unexpected Application Error!”
+Prerequisite: user must be logged in
+
+Test case 20: Show "Create an event" button on hover
+GIVEN the user is on homepage “http://localhost:3000/”
+WHEN the user hovers over the “+” (plus) button
+THEN the new button is shown “Create an event”
+Expected: “Create an event” button is shown
+Actual: as expected
+Test case 21: Navigate to create event form
+GIVEN the user hovers over “plus”
+AND clicks “Create an event”
+THEN redirected to “http://localhost:3000/events/new”
+AND form contains:
+- event title
+- image
+- date
+- location
+- description
+- create event button
+Expected: All form fields are visible and displayed with required fields
+Actual: As expected
+
+Test case 22: Successfully create event with all fields
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enter the fields:
+-event title: “City of lights”
+-event image: “https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyA25-EzRo0Ob7J0vVTA83I7Qc9dd07YVPUw&s”
+-event date: “20-05-2025”
+-event location: “Paris”
+-event description: “A timeless glow wraps Paris in elegance and charm.”
+AND user clicks “Create event”
+THEN event is created
+AND user is redirected to http://localhost:3000/events
+Expected: Event is added and listed, user is redirected and event appears
+Actual: As expected
+
+Test case 23: Create event with missing title
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enter the fields:
+-event image: “https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyA25-EzRo0Ob7J0vVTA83I7Qc9dd07YVPUw&s”
+-event date: “20-05-2025”
+-event location: “Paris”
+-event description: “A timeless glow wraps Paris in elegance and charm.”
+AND the user leaves the event title empty
+AND user clicks “Create event”
+THEN event is not created
+AND error message is shown
+Expected: An error message “Image field is required” should shown
+Actual: As expected
+
+Test case 24: Create event with missing image
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enters the field:
+- event title: “City of lights”
+- event date: “20-05-2025”
+- event location: “Paris”
+- event description: “A timeless glow wraps Paris in elegance and charm.”
+AND the user leaves the event image filled empty
+AND clicks “Create event”
+THEN event is not created
+AND error message is shown
+Expected: an error message is shown “Image field is required”
+Actual: user is redirected to the “http://localhost:3000/events/new” and a message “Unexpected Application Error!”
+
+Test case 25: Create event with missing date
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enters the fields:
+- event title: “City of lights”
+- event image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyA25-EzRo0Ob7J0vVTA83I7Qc9dd07YVPUw&s
+- event location: “Paris”
+- event description: “A timeless glow wraps Paris in elegance and charm.”
+AND the event date field is empty
+AND the user clicks “Create event”
+THEN the event is not created
+AND an error message is shown
+Expected: Error message: “Date field is required”
+Actual: user is redirected to the “http://localhost:3000/events/new” and a message “Unexpected Application Error!”
+
+Test case 26: Create event with missing location
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enters the fields:
+- event title: “City of lights”
+-event image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyA25-EzRo0Ob7J0vVTA83I7Qc9dd07YVPUw&s
+-event date: “20-05-2025”
+-event description: “A timeless glow wraps Paris in elegance and charm.”
+AND the event location field is empty
+AND the user clicks “Create event”
+THEN event is not created
+AND error message is shown
+Expected: Error message: “Location field is required”
+Actual: user is redirected to the “http://localhost:3000/events/new” and a message “Unexpected Application Error!”
+
+Test case 27: Create event with missing description
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user enters the fields:
+- event title: “City of lights”
+-event image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyA25-EzRo0Ob7J0vVTA83I7Qc9dd07YVPUw&s
+-event date: “20-05-2025”
+-event location: “Paris”
+AND the user leaves event description field empty
+AND clicks “Create event”
+THEN event is not created
+AND error message is shown
+Expected: An error message should appear “Event description field is required”
+Actual: user is redirected to the “http://localhost:3000/events/new” and a message “Unexpected Application Error!”
+
+Test case 28: Create event with all fields empty
+GIVEN the user is on “create event” form “http://localhost:3000/events/new”
+WHEN the user leave the fields empty:
+-event title
+-event image
+-event date
+-event location
+-event description
+AND clicks “Create event”
+THEN event is not created
+AND error message is shown
+Expected: Error message “All fields are required”
+Actual: user is redirected to the “http://localhost:3000/events/new” and a message “Unexpected Application Error!”
+
+Test case 29: View event details from events list
+GIVEN the user is on events page “http://localhost:3000/events”
+WHEN clicks event image
+THEN event detail is shown with:
+- event title
+- image (small)
+- Edit button
+- Back button
+- Delete button
+Expected: Event details and buttons are correctly displayed
+Actual: As expected
+
+Test case 30: Open event edit form
+GIVEN user is on event detail page “http://localhost:3000/events/aa29d560-59ee-4e49-8f9a-9d8ff178c3ce”
+WHEN the user clicks “Edit” button
+THEN the user is redirected to “http://localhost:3000/events/aa29d560-59ee-4e49-8f9a-9d8ff178c3ce”
+AND update form is shown with:
+- title
+- image
+- date
+- location
+- description
+AND “Update event” button
+Expected: Update form appears correctly
+Actual: as expected
+
+Test case 31: Open delete confirmation dialog
+GIVEN user is on event detail page “http://localhost:3000/events/aa29d560-59ee-4e49-8f9a-9d8ff178c3ce”
+WHEN clicks “Delete” button
+THEN confirmation dialog appears with:
+- message: “Are you sure you want to delete this event?”
+- buttons: “Delete” and “No”
+Expected: Confirmation dialog is shown and contains two buttons
+Actual: As expected
+
+Test case 32: Confirm delete in dialog
+GIVEN confirmation dialog is open
+WHEN user clicks “Delete”
+THEN event is deleted
+AND user is redirected to http://localhost:3000/events
+Expected: event no longer appears, the user is redirected to the list
+Actual: As expected
+
+Test case 33: Cancel delete from dialog
+GIVEN confirmation dialog is open
+WHEN user clicks “No”
+THEN dialog closes
+AND event is not deleted
+AND user remains on details page
+Expected: Dialog closes, no event is removed
+Actual: As expected
+
+Test case 34: Logout from homepage
+GIVEN the user is on the homepage “http://localhost:3000/”
+WHEN clicks logout button from side panel
+THEN the user is logged out
+AND logout button disappears
+AND login button appears
+Expected: User is logged out, login button is visible again
+Actual: As expected
